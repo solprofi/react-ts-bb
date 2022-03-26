@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { 
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import groupBy from 'lodash-es/groupBy';
 import map from 'lodash-es/map';
+import { Skeleton } from '@mui/material';
 
 import { fetchEpisodes } from '../../api/episodes';
 import SeasonBlock from '../SeasonBlock/SeasonBlock';
@@ -17,7 +22,7 @@ const Episodes = () => {
   const fetchEpisodeData = async () => {
     const data: Episode[]  = await fetchEpisodes();
 
-    const mappedEpisodesBySeason: Seasons = groupBy(data, 'season');
+    const mappedEpisodesBySeason: Seasons = groupBy(data, episode => Number(episode.season));
     setGroupedEpisodes(mappedEpisodesBySeason);
   }
   
@@ -26,18 +31,35 @@ const Episodes = () => {
     setIsLoading(false);
   }, []);
 
-  const renderSeasons = () => map(groupedEpisodes, (seasonData: Season, key: string) => {
-      return (
-        <SeasonBlock
-          seasonData={seasonData}
-          key={key} />
-      );
-  });
-  
+  const renderSeasons = useCallback(() => map(groupedEpisodes, (seasonData: Season, seasonNumber: string) => {
+    return (
+      <SeasonBlock
+        seasonData={seasonData}
+        seasonNumber={seasonNumber}
+        key={seasonNumber} />
+    );
+  }), [groupedEpisodes]);
+
+  const renderLoader = useCallback(() => {
+    const skeletons = new Array(5);
+
+    return map(skeletons, (el, index) => (
+      <Skeleton
+        variant='text'
+        width={150}
+        height={50} 
+        key={index}
+        animation='wave'
+        style={{ marginBottom: 6 }}
+      />
+    ))
+  }, []);
 
   return (
     <div>
-      {renderSeasons()}
+      {
+        isLoading ? renderLoader() : renderSeasons()
+      }
     </div>
   );
 }

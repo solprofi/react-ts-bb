@@ -15,7 +15,7 @@ const Character = lazy(() => import('./components/Character/Character'));
 const App = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>...Loading</div>}>
+      <Suspense fallback={<div></div>}>
         <Routes>
           <Route
             path={PATHS.EPISODES}
