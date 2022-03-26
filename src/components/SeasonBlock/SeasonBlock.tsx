@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Collapse,
   Typography,
-  Grid
+  Grid,
 } from '@mui/material';
 import map from 'lodash-es/map';
 
