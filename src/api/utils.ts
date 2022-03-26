@@ -3,6 +3,12 @@ export function request<TResponse>(
   config: RequestInit = {}
 ): Promise<TResponse> {
   return fetch(url, config)
-    .then(response => response.json())
-    .then(data => data as TResponse);
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } 
+
+      throw Promise.reject(response.status);
+    })
+    .then(data => data as TResponse)
 }
