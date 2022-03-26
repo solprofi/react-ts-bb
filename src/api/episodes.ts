@@ -1,5 +1,7 @@
-import { API_PATH } from './constants';
+import { API_PATH } from '../constants/api';
+import { Episode } from '../types/types';
+import { request } from './utils';
 
-export const fetchEpisodes = async () => fetch(`${API_PATH}api/episodes`);
+export const fetchEpisodes = () => request<Episode[]>(`${API_PATH}api/episodes`);
 
-export const fetchEpisodeById = async (id: number) => fetch(`${API_PATH}api/episodes/${id}`);
+export const fetchEpisodeById = (id: number) => request<Episode>(`${API_PATH}api/episodes/${id}`);
