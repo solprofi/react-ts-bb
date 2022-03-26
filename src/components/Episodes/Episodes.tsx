@@ -1,4 +1,4 @@
-import React, { 
+import React, {
   useEffect,
   useState,
   useCallback,
@@ -10,24 +10,24 @@ import { Skeleton } from '@mui/material';
 import { fetchEpisodes } from '../../api/episodes';
 import SeasonBlock from '../SeasonBlock/SeasonBlock';
 import {
-  Episode, 
+  Episode,
   Season,
   Seasons,
 } from '../../types/types';
 
 const Episodes = () => {
   const [groupedEpisodes, setGroupedEpisodes] = useState<Seasons | []>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const fetchEpisodeData = async () => {
-    const data: Episode[]  = await fetchEpisodes();
+  const fetchEpisodesData = async () => {
+    const data: Episode[] = await fetchEpisodes();
 
     const mappedEpisodesBySeason: Seasons = groupBy(data, episode => Number(episode.season));
     setGroupedEpisodes(mappedEpisodesBySeason);
   }
-  
+
   useEffect(() => {
-    fetchEpisodeData();
+    fetchEpisodesData();
     setIsLoading(false);
   }, []);
 
@@ -36,7 +36,8 @@ const Episodes = () => {
       <SeasonBlock
         seasonData={seasonData}
         seasonNumber={seasonNumber}
-        key={seasonNumber} />
+        key={seasonNumber}
+      />
     );
   }), [groupedEpisodes]);
 
@@ -47,7 +48,7 @@ const Episodes = () => {
       <Skeleton
         variant='text'
         width={150}
-        height={50} 
+        height={50}
         key={index}
         animation='wave'
         style={{ marginBottom: 6 }}
