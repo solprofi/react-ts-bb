@@ -4,4 +4,4 @@ import { request } from './utils';
 
 export const fetchEpisodes = () => request<Episode[]>(`${API_PATH}api/episodes`);
 
-export const fetchEpisodeById = (id: number) => request<Episode>(`${API_PATH}api/episodes/${id}`);
+export const fetchEpisodeById = (id: number) => request<Episode[]>(`${API_PATH}api/episodes/${id}`);
