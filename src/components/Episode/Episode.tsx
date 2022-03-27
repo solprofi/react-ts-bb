@@ -13,6 +13,7 @@ import {
   Divider,
   Chip,
   Stack,
+  Skeleton,
 } from '@mui/material';
 import FaceIcon from '@mui/icons-material/Face';
 
@@ -141,6 +142,27 @@ const EpisodePage = () => {
 
     return null;
   }, [renderCharacterChips, episodeData]);
+
+  if (isLoading) {
+    return (
+      <Grid
+        container
+        spacing={2}
+        justifyContent='center'
+      >
+        <Grid
+          item
+          xs={10}
+        >
+          <Skeleton
+            variant='rectangular'
+            height={133}
+            animation='wave'
+          />
+        </Grid>
+      </Grid>
+    )
+  }
 
   return (
     <div>
