@@ -1,0 +1,22 @@
+.season-heading {
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  width: 200px;
+}
+
+.arrow.open,
+.arrow.closed
+{
+  transition: all 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotateZ(90deg);
+}
+
+.season-content {
+  padding: 16px;
+  border-radius: 5px;
+  background: rgb(29, 8, 8, 0.425);
+}

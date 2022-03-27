@@ -14,6 +14,7 @@ import {
   Season,
   Seasons,
 } from '../../types/types';
+import './Episodes.css';
 
 const Episodes = () => {
   const [groupedEpisodes, setGroupedEpisodes] = useState<Seasons | []>([]);
@@ -53,13 +54,12 @@ const Episodes = () => {
         height={50}
         key={index}
         animation='wave'
-        style={{ marginBottom: 6 }}
       />
     ))
   }, []);
 
   return (
-    <div>
+    <div className='home-wrapper'>
       {
         isLoading ? renderLoader() : renderSeasons()
       }
