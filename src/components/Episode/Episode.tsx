@@ -13,7 +13,7 @@ import {
   Typography,
   Divider,
   Chip,
-  Stack,
+  Box,
   Skeleton,
   Fade,
 } from '@mui/material';
@@ -85,14 +85,18 @@ const EpisodePage = () => {
 
   const renderCharacterChips = useCallback((characters: string[]) => {
     return map(characters, character => (
-      <Chip
-        className='character-chip'
-        icon={<FaceIcon />}
-        label={character}
-        variant='outlined'
+      <Box
+        gridColumn='span 3'
         key={character}
-        onClick={() => handleCharacterClick(character)}
-      />
+      >
+        <Chip
+          className='character-chip'
+          icon={<FaceIcon />}
+          label={character}
+          variant='outlined'
+          onClick={() => handleCharacterClick(character)}
+        />
+      </Box>
     ))
   }, [handleCharacterClick]);
 
@@ -129,13 +133,14 @@ const EpisodePage = () => {
 
               <Divider variant='middle'>Characters</Divider>
 
-              <Stack
-                className='character-row'
-                direction='row'
-                spacing={1}
+              <Box
+                display='grid'
+                gridTemplateColumns='repeat(12, 1fr)'
+                gap={2}
+                sx={{ p: 2 }}
               >
                 {renderCharacterChips(characters)}
-              </Stack>
+              </Box>
 
               <CardActions className='actions-wrapper'>
                 <Button

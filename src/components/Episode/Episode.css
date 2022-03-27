@@ -19,13 +19,8 @@
   height: 350px;
 }
 
-.character-row {
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.character-row .character-chip {
-  margin-bottom: 10px;
+.character-chip {
+  width: 100%;
 }
 
 .actions-wrapper {

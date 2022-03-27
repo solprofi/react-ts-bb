@@ -42,12 +42,14 @@ const EpisodeCard = (props: EpisodeCardProps) => {
         >
           {title}
         </Typography>
+
         <Typography
           variant='caption'
         >
-          {air_date}
+          Air Date: {air_date}
         </Typography>
-        <Divider light />
+
+        <Divider />
       </CardContent>
     </Card>
   );
