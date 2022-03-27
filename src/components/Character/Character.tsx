@@ -18,12 +18,14 @@ import { Character } from '../../types/types';
 import { fetchCharacterByName } from '../../api/characters';
 import './Character.css';
 import EmptyState from '../EmptyState/EmptyState';
+import Toast from '../Toast/Toast';
 
 const CharacterPage = () => {
   const { name } = useParams();
 
   const [characterData, setCharacterData] = useState<Character | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | boolean>(false);
 
   const fetchCharacterData = useCallback(async () => {
     try {
@@ -36,7 +38,7 @@ const CharacterPage = () => {
         }
       }
     } catch (e) {
-
+      setError('Error while loading character data');
     }
   }, [name]);
 
@@ -132,7 +134,7 @@ const CharacterPage = () => {
               >
                 Occupation(s):
               </Typography>
-              
+
               {renderOccupationList(occupation)}
             </CardContent>
           </Card>
@@ -141,13 +143,16 @@ const CharacterPage = () => {
     }
   }, [characterData]);
 
-  if (!isLoading && !characterData) {
+  if (isLoading || characterData || error) {
     return (
       <div className='character-wrapper'>
-        <EmptyState
-          className='empty-state-block'
-          elevation={3}
-          text='There is no data available for this character'
+        {isLoading ? renderLoader() : renderCharacterData()}
+
+        <Toast
+          isToastOpen={Boolean(error)}
+          setIsToastOpen={setError}
+          text={error}
+          type='error'
         />
       </div>
     )
@@ -155,7 +160,11 @@ const CharacterPage = () => {
 
   return (
     <div className='character-wrapper'>
-      {isLoading ? renderLoader() : renderCharacterData()}
+      <EmptyState
+        className='empty-state-block'
+        elevation={3}
+        text='There is no data available for this character'
+      />
     </div>
   )
 }

@@ -9,17 +9,28 @@ type ToastProps = {
   autoHideDuration?: number
   type?: 'info' | 'success' | 'warning' | 'error'
   isToastOpen: boolean
-  onClose: () => void
-  text: string
+  setIsToastOpen: (value: string | boolean) => void
+  text: string | boolean
 }
 
 const Toast = (props: ToastProps) => {
   const {
+    setIsToastOpen, 
+    text,
+    isToastOpen
+  } = props;
+  
+  const onClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsToastOpen(false);
+  };
+
+  const {
     autoHideDuration = 3000,
     type = 'info',
-    isToastOpen,
-    onClose,
-    text,
   } = props;
 
   return (

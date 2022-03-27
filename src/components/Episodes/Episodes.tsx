@@ -15,16 +15,22 @@ import {
   Seasons,
 } from '../../types/types';
 import './Episodes.css';
+import Toast from '../Toast/Toast';
 
 const Episodes = () => {
   const [groupedEpisodes, setGroupedEpisodes] = useState<Seasons | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | boolean>(false);
 
   const fetchEpisodesData = async () => {
-    const data: Episode[] = await fetchEpisodes();
-
-    const mappedEpisodesBySeason: Seasons = groupBy(data, episode => Number(episode.season));
-    setGroupedEpisodes(mappedEpisodesBySeason);
+    try {
+      const data: Episode[] = await fetchEpisodes();
+      
+      const mappedEpisodesBySeason: Seasons = groupBy(data, episode => Number(episode.season));
+      setGroupedEpisodes(mappedEpisodesBySeason);
+    } catch (e) {
+      setError('Error while loading seasons data');
+    }
   }
 
   useEffect(() => {
@@ -63,6 +69,13 @@ const Episodes = () => {
       {
         isLoading ? renderLoader() : renderSeasons()
       }
+
+      <Toast
+        isToastOpen={Boolean(error)}
+        setIsToastOpen={setError}
+        text={error}
+        type='error'
+      />
     </div>
   );
 }

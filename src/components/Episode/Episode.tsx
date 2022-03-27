@@ -31,20 +31,7 @@ const EpisodePage = () => {
 
   const [episodeData, setEpisodeData] = useState<Episode | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
-
-  const raiseAlert = () => {
-    setIsToastOpen(true);
-  };
-
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setIsToastOpen(false);
-  };
+  const [error, setError] = useState<string | boolean>(false);
 
   const redirectHome = useCallback(() => {
     navigate(PATHS.EPISODES);
@@ -57,16 +44,13 @@ const EpisodePage = () => {
 
     try {
       const data: Episode[] = await fetchEpisodeById(Number(id));
-
       if (data.length) {
         setEpisodeData(data[0]);
       } else {
         return redirectHome();
       }
     } catch (e) {
-      raiseAlert();
-    } finally {
-      setIsLoading(false);
+      setError('Error while loading episode data');
     }
   }, [id, redirectHome]);
 
@@ -178,10 +162,10 @@ const EpisodePage = () => {
       </div>
 
       <Toast
-        isToastOpen={isToastOpen}
+        isToastOpen={Boolean(error)}
+        setIsToastOpen={setError}
+        text={error}
         type='error'
-        onClose={handleClose}
-        text='Error while loading an episode'
       />
     </div>
   );

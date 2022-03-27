@@ -35,7 +35,8 @@ const App = () => {
             element={
               <Navigate
                 to={PATHS.EPISODES}
-                replace />
+                replace
+              />
             }
           />
         </Routes>
