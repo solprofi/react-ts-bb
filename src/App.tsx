@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import {
-  Routes, 
+  Routes,
   Route,
-  BrowserRouter 
+  BrowserRouter,
+  Navigate
 } from 'react-router-dom';
 
 import './App.css';
@@ -19,19 +20,23 @@ const App = () => {
         <Routes>
           <Route
             path={PATHS.EPISODES}
-            element={<Episodes />} 
+            element={<Episodes />}
           />
           <Route
             path={PATHS.EPISODE_TEMPLATE}
-            element={<Episode />} 
+            element={<Episode />}
           />
           <Route
             path={PATHS.CHARACTER_TEMPLATE}
-            element={<Character />} 
+            element={<Character />}
           />
           <Route
             path='*'
-            element={<Episodes/>} 
+            element={
+              <Navigate
+                to={PATHS.EPISODES}
+                replace />
+            }
           />
         </Routes>
       </Suspense>
