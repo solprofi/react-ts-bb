@@ -96,6 +96,7 @@ const CharacterPage = () => {
               image={img}
               alt={name}
             />
+
             <CardContent>
               <Typography
                 variant='h5'
@@ -103,18 +104,21 @@ const CharacterPage = () => {
               >
                 {name}
               </Typography>
+
               <Typography
                 variant='h6'
                 component='div'
               >
                 a.k.a. "{nickname}"
               </Typography>
+
               <Typography
                 variant='body2'
                 color='text.secondary'
               >
                 Status: {status}
               </Typography>
+
               <Typography
                 variant='body2'
                 color='text.secondary'
@@ -128,6 +132,7 @@ const CharacterPage = () => {
               >
                 Occupation(s):
               </Typography>
+              
               {renderOccupationList(occupation)}
             </CardContent>
           </Card>
