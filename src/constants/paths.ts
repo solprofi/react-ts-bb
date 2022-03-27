@@ -3,6 +3,6 @@ export const PATHS = {
   EPISODE_TEMPLATE: '/episodes/:id',
   EPISODE: (id: number) => `/episodes/${id}`,
   
-  CHARACTER_TEMPLATE: '/characters/:id',
-  CHARACTER: (id: number) => `/characters/${id}`,
+  CHARACTER_TEMPLATE: '/characters/:name',
+  CHARACTER: (name: string) => `/characters/${name}`,
 }

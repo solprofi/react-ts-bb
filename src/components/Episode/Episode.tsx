@@ -44,12 +44,11 @@ const EpisodePage = () => {
 
   const redirectHome = useCallback(() => {
     navigate(PATHS.EPISODES);
-    return;
   }, [navigate]);
 
   const fetchEpisodeData = useCallback(async () => {
     if (isNaN(Number(id))) {
-      redirectHome();
+     return redirectHome();
     }
 
     try {
@@ -58,7 +57,7 @@ const EpisodePage = () => {
       if (data.length) {
         setEpisodeData(data[0]);
       } else {
-        redirectHome();
+        return redirectHome();
       }
     } catch (e) {
       raiseAlert();
@@ -70,7 +69,13 @@ const EpisodePage = () => {
   useEffect(() => {
     fetchEpisodeData();
     setIsLoading(false);
+
+    return () => {};
   }, [fetchEpisodeData]);
+
+  const handleCharacterClick = useCallback((character: string) => {
+    return navigate(PATHS.CHARACTER(character));
+  }, [navigate]);
 
   const renderCharacterChips = useCallback((characters: string[]) => {
     return map(characters, character => (
@@ -78,9 +83,11 @@ const EpisodePage = () => {
         icon={<FaceIcon />}
         label={character}
         variant='outlined'
+        key={character}
+        onClick={() => handleCharacterClick(character)}
       />
     ))
-  }, []);
+  }, [handleCharacterClick]);
 
   const renderEpisodeData = useCallback(() => {
     if (episodeData) {
@@ -108,11 +115,13 @@ const EpisodePage = () => {
                 >
                   {title}
                 </Typography>
+
                 <Typography
                   variant='caption'
                 >
                   {air_date}
                 </Typography>
+
                 <Divider light />
 
                 <Stack

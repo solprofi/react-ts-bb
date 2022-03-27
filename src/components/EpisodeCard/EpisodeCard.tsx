@@ -26,7 +26,7 @@ const EpisodeCard = (props: EpisodeCardProps) => {
   } = props;
 
   const handleCardClick = () => {
-    navigate(PATHS.EPISODE(episode_id));
+    return navigate(PATHS.EPISODE(episode_id));
   }
 
   return (

@@ -1,5 +1,5 @@
 import { API_PATH } from '../constants/api';
+import { Character } from './../types/types';
+import { request } from './utils';
 
-export const fetchCharacters = async () => fetch(`${API_PATH}api/characters`);
-
-export const fetchCharacterByName = async (name: string) => fetch(`${API_PATH}api/characters/${name}`);
+export const fetchCharacterByName = (name: string) => request<Character[]>(`${API_PATH}api/characters?name=${name}`);
