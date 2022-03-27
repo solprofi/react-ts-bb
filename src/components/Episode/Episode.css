@@ -6,12 +6,12 @@
   position: relative;
 }
 
-.episode-card,
-.card-skeleton
-{
+.card-wrapper {
   position: absolute;
   top: 10%;
   left: 60%;
+  min-width: 600px;
+  min-height: 350px;
 }
 
 .episode-card {

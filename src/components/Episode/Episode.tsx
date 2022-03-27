@@ -15,6 +15,7 @@ import {
   Chip,
   Stack,
   Skeleton,
+  Fade,
 } from '@mui/material';
 import FaceIcon from '@mui/icons-material/Face';
 
@@ -104,43 +105,49 @@ const EpisodePage = () => {
       } = episodeData;
 
       return (
-        <Card
-          className='episode-card'
-          raised
+        <Fade
+          appear
+          in
         >
-          <CardContent>
-            <Typography
-              variant='h4'
-              gutterBottom
-            >
-              Episode: "{title}"
-            </Typography>
-
-            <Typography
-              variant='h6'
-            >
-              Air Date: {air_date}
-            </Typography>
-
-            <Divider variant='middle'>Characters</Divider>
-
-            <Stack
-              className='character-row'
-              direction='row'
-              spacing={1}
-            >
-              {renderCharacterChips(characters)}
-            </Stack>
-            <CardActions className='actions-wrapper'>
-              <Button
-                size='small'
-                onClick={redirectHome}
+          <Card
+            className='episode-card'
+            raised
+          >
+            <CardContent>
+              <Typography
+                variant='h4'
+                gutterBottom
               >
-                All episodes
-              </Button>
-            </CardActions>
-          </CardContent>
-        </Card>
+                Episode: "{title}"
+              </Typography>
+
+              <Typography
+                variant='h6'
+              >
+                Air Date: {air_date}
+              </Typography>
+
+              <Divider variant='middle'>Characters</Divider>
+
+              <Stack
+                className='character-row'
+                direction='row'
+                spacing={1}
+              >
+                {renderCharacterChips(characters)}
+              </Stack>
+
+              <CardActions className='actions-wrapper'>
+                <Button
+                  size='small'
+                  onClick={redirectHome}
+                >
+                  All episodes
+                </Button>
+              </CardActions>
+            </CardContent>
+          </Card>
+        </Fade>
       );
     }
 
@@ -161,7 +168,9 @@ const EpisodePage = () => {
 
   return (
     <div className='episode-wrapper'>
-      {isLoading ? renderLoader() : renderEpisodeData()}
+      <div className='card-wrapper'>
+        {isLoading ? renderLoader() : renderEpisodeData()}
+      </div>
 
       <Toast
         isToastOpen={isToastOpen}

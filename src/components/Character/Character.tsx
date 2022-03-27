@@ -9,12 +9,15 @@ import {
   CardContent,
   Typography,
   CardMedia,
-  Skeleton
+  Skeleton,
+  Fade
 } from '@mui/material';
 import map from 'lodash-es/map';
 
 import { Character } from '../../types/types';
 import { fetchCharacterByName } from '../../api/characters';
+import './Character.css';
+import EmptyState from '../EmptyState/EmptyState';
 
 const CharacterPage = () => {
   const { name } = useParams();
@@ -55,76 +58,101 @@ const CharacterPage = () => {
     ))
   }
 
-  if (isLoading) {
+  const renderLoader = useCallback(() => {
     return (
       <Skeleton
+        className='card-skeleton'
         variant='rectangular'
         width={345}
-        height={450}
+        height={650}
         animation='wave'
       />
     )
-  }
+  }, []);
 
-  if (characterData) {
-    const {
-      name,
-      birthday,
-      nickname,
-      img,
-      status,
-      occupation
-    } = characterData;
+  const renderCharacterData = useCallback(() => {
+    if (characterData) {
+      const {
+        name,
+        birthday,
+        nickname,
+        img,
+        status,
+        occupation
+      } = characterData;
 
+      return (
+        <Fade
+          appear
+          in
+        >
+          <Card
+            className='character-card'
+            raised
+          >
+            <CardMedia
+              component='img'
+              height='450'
+              image={img}
+              alt={name}
+            />
+            <CardContent>
+              <Typography
+                variant='h5'
+                component='div'
+              >
+                {name}
+              </Typography>
+              <Typography
+                variant='h6'
+                component='div'
+              >
+                a.k.a. "{nickname}"
+              </Typography>
+              <Typography
+                variant='body2'
+                color='text.secondary'
+              >
+                Status: {status}
+              </Typography>
+              <Typography
+                variant='body2'
+                color='text.secondary'
+              >
+                DOB: {birthday}
+              </Typography>
+
+              <Typography
+                variant='body2'
+                color='text.secondary'
+              >
+                Occupation(s):
+              </Typography>
+              {renderOccupationList(occupation)}
+            </CardContent>
+          </Card>
+        </Fade>
+      );
+    }
+  }, [characterData]);
+
+  if (!isLoading && !characterData) {
     return (
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component='img'
-          height='450'
-          image={img}
-          alt={name}
+      <div className='character-wrapper'>
+        <EmptyState
+          className='empty-state-block'
+          elevation={3}
+          text='There is no data available for this character'
         />
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant='h5'
-            component='div'
-          >
-            {name}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant='h6'
-            component='div'
-          >
-            a.k.a. "{nickname}"
-          </Typography>
-          <Typography
-            variant='body2'
-            color='text.secondary'
-          >
-            Status: {status}
-          </Typography>
-          <Typography
-            variant='body2'
-            color='text.secondary'
-          >
-            DOB: {birthday}
-          </Typography>
-
-          <Typography
-            variant='body2'
-            color='text.secondary'
-          >
-            Occupation(s):
-          </Typography>
-          {renderOccupationList(occupation)}
-        </CardContent>
-      </Card>
-    );
+      </div>
+    )
   }
 
-  return <div>There is no data for this character</div>;
+  return (
+    <div className='character-wrapper'>
+      {isLoading ? renderLoader() : renderCharacterData()}
+    </div>
+  )
 }
 
 export default CharacterPage;
