@@ -8,6 +8,8 @@ import map from 'lodash-es/map';
 import {
   Card,
   CardContent,
+  CardActions,
+  Button,
   Typography,
   Divider,
   Chip,
@@ -129,13 +131,21 @@ const EpisodePage = () => {
             >
               {renderCharacterChips(characters)}
             </Stack>
+            <CardActions className='actions-wrapper'>
+              <Button
+                size='small'
+                onClick={redirectHome}
+              >
+                All episodes
+              </Button>
+            </CardActions>
           </CardContent>
         </Card>
       );
     }
 
     return null;
-  }, [renderCharacterChips, episodeData]);
+  }, [renderCharacterChips, episodeData, redirectHome]);
 
   const renderLoader = useCallback(() => {
     return (
@@ -143,7 +153,7 @@ const EpisodePage = () => {
         className='card-skeleton'
         variant='rectangular'
         width={600}
-        height={300}
+        height={350}
         animation='wave'
       />
     )

@@ -16,7 +16,7 @@
 
 .episode-card {
   width: 600px;
-  height: 300px;
+  height: 350px;
 }
 
 .character-row {
@@ -26,4 +26,9 @@
 
 .character-row .character-chip {
   margin-bottom: 10px;
+}
+
+.actions-wrapper {
+  display: flex;
+  justify-content: center;
 }
