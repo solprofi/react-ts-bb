@@ -27,8 +27,10 @@ const Episodes = () => {
   }
 
   useEffect(() => {
-    fetchEpisodesData();
-    setIsLoading(false);
+    fetchEpisodesData()
+      .then(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const renderSeasons = useCallback(() => map(groupedEpisodes, (seasonData: Season, seasonNumber: string) => {

@@ -48,7 +48,7 @@ const EpisodePage = () => {
 
   const fetchEpisodeData = useCallback(async () => {
     if (isNaN(Number(id))) {
-     return redirectHome();
+      return redirectHome();
     }
 
     try {
@@ -67,10 +67,12 @@ const EpisodePage = () => {
   }, [id, redirectHome]);
 
   useEffect(() => {
-    fetchEpisodeData();
-    setIsLoading(false);
+    fetchEpisodeData()
+      .then(() => {
+        setIsLoading(false);
+      });
 
-    return () => {};
+    return () => { };
   }, [fetchEpisodeData]);
 
   const handleCharacterClick = useCallback((character: string) => {
