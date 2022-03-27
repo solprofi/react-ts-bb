@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Collapse,
   Typography,
-  Grid,
+  Box
 } from '@mui/material';
 import map from 'lodash-es/map';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -27,13 +27,12 @@ const SeasonBlock = (props: SeasonBlockProps) => {
 
   const renderEpisodes = () => {
     return map(seasonData, (episodeData, index) => (
-      <Grid
-        item
-        xs={3}
+      <Box
+        gridColumn='span 3'
         key={index}
       >
         <EpisodeCard episodeData={episodeData} />
-      </Grid>
+      </Box>
     ))
   }
 
@@ -45,7 +44,7 @@ const SeasonBlock = (props: SeasonBlockProps) => {
         component='h4'
         onClick={toggleCollapseOpen}
       >
-        Season {seasonNumber} 
+        Season {seasonNumber}
         <ArrowForwardIosIcon className={`arrow ${isCollapseOpen ? 'open' : 'closed'}`} />
       </Typography>
 
@@ -53,14 +52,15 @@ const SeasonBlock = (props: SeasonBlockProps) => {
         className='season-content'
         in={isCollapseOpen}
         timeout='auto'
-        unmountOnExit
       >
-        <Grid
-          container
-          spacing={2}
-          >
+        <Box
+          display='grid'
+          gridTemplateColumns='repeat(12, 1fr)'
+          gap={2}
+          sx={{ p: 2}}
+        >
           {renderEpisodes()}
-        </Grid>
+        </Box>
       </Collapse>
     </>
   );
