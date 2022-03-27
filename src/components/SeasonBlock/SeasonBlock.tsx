@@ -40,20 +40,20 @@ const SeasonBlock = (props: SeasonBlockProps) => {
   return (
     <>
       <Typography
+        className='season-heading'
         variant='h4'
         component='h4'
         onClick={toggleCollapseOpen}
-        className='season-heading'
       >
         Season {seasonNumber} 
         <ArrowForwardIosIcon className={`arrow ${isCollapseOpen ? 'open' : 'closed'}`} />
       </Typography>
 
       <Collapse
+        className='season-content'
         in={isCollapseOpen}
         timeout='auto'
         unmountOnExit
-        className='season-content'
       >
         <Grid
           container

@@ -33,6 +33,7 @@ const EpisodeCard = (props: EpisodeCardProps) => {
     <Card
       style={{ cursor: 'pointer' }}
       onClick={handleCardClick}
+      raised
     >
       <CardContent>
         <Typography

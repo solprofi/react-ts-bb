@@ -1,0 +1,29 @@
+.episode-wrapper {
+  height: 100%;
+  background-image: url('../../assets/images/episodePage.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.episode-card,
+.card-skeleton
+{
+  position: absolute;
+  top: 10%;
+  left: 60%;
+}
+
+.episode-card {
+  width: 600px;
+  height: 300px;
+}
+
+.character-row {
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.character-row .character-chip {
+  margin-bottom: 10px;
+}

@@ -6,7 +6,6 @@ import React, {
 import { useParams, useNavigate } from 'react-router-dom';
 import map from 'lodash-es/map';
 import {
-  Grid,
   Card,
   CardContent,
   Typography,
@@ -21,6 +20,7 @@ import { fetchEpisodeById } from '../../api/episodes';
 import { Episode } from '../../types/types';
 import { PATHS } from '../../constants/paths';
 import Toast from '../Toast/Toast';
+import './Episode.css';
 
 const EpisodePage = () => {
   const { id } = useParams();
@@ -83,6 +83,7 @@ const EpisodePage = () => {
   const renderCharacterChips = useCallback((characters: string[]) => {
     return map(characters, character => (
       <Chip
+        className='character-chip'
         icon={<FaceIcon />}
         label={character}
         variant='outlined'
@@ -101,72 +102,56 @@ const EpisodePage = () => {
       } = episodeData;
 
       return (
-        <Grid
-          container
-          spacing={2}
-          justifyContent='center'
+        <Card
+          className='episode-card'
+          raised
         >
-          <Grid
-            item
-            xs={10}
-          >
-            <Card>
-              <CardContent>
-                <Typography
-                  variant='h6'
-                  gutterBottom
-                >
-                  {title}
-                </Typography>
+          <CardContent>
+            <Typography
+              variant='h4'
+              gutterBottom
+            >
+              Episode: "{title}"
+            </Typography>
 
-                <Typography
-                  variant='caption'
-                >
-                  {air_date}
-                </Typography>
+            <Typography
+              variant='h6'
+            >
+              Air Date: {air_date}
+            </Typography>
 
-                <Divider light />
+            <Divider variant='middle'>Characters</Divider>
 
-                <Stack
-                  direction='row'
-                  spacing={1}
-                >
-                  {renderCharacterChips(characters)}
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+            <Stack
+              className='character-row'
+              direction='row'
+              spacing={1}
+            >
+              {renderCharacterChips(characters)}
+            </Stack>
+          </CardContent>
+        </Card>
       );
     }
 
     return null;
   }, [renderCharacterChips, episodeData]);
 
-  if (isLoading) {
+  const renderLoader = useCallback(() => {
     return (
-      <Grid
-        container
-        spacing={2}
-        justifyContent='center'
-      >
-        <Grid
-          item
-          xs={10}
-        >
-          <Skeleton
-            variant='rectangular'
-            height={133}
-            animation='wave'
-          />
-        </Grid>
-      </Grid>
+      <Skeleton
+        className='card-skeleton'
+        variant='rectangular'
+        width={600}
+        height={300}
+        animation='wave'
+      />
     )
-  }
+  }, []);
 
   return (
-    <div>
-      {renderEpisodeData()}
+    <div className='episode-wrapper'>
+      {isLoading ? renderLoader() : renderEpisodeData()}
 
       <Toast
         isToastOpen={isToastOpen}
