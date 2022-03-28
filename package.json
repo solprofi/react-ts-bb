@@ -31,6 +31,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": ["node_modules/(?!lodash-es/groupBy)/"]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -137,6 +143,7 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.6"
+    "@types/lodash-es": "^4.17.6",
+    "jest-watch-typeahead": "^0.6.5"
   }
 }
