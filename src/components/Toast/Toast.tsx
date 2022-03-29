@@ -43,6 +43,7 @@ const Toast = (props: ToastProps) => {
         onClose={onClose}
         severity={type}
         sx={{ width: '100%' }}
+        data-testid='alert'
       >
         {text}
       </Alert>
