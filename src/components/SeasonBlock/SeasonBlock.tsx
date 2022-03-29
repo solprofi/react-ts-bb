@@ -43,21 +43,27 @@ const SeasonBlock = (props: SeasonBlockProps) => {
         variant='h4'
         component='h4'
         onClick={toggleCollapseOpen}
+        data-testid='season-heading'
       >
         Season {seasonNumber}
-        <ArrowForwardIosIcon className={`arrow ${isCollapseOpen ? 'open' : 'closed'}`} />
+
+        <ArrowForwardIosIcon
+          className={`arrow ${isCollapseOpen ? 'open' : 'closed'}`}
+          data-testid='season-expand-arrow'
+        />
       </Typography>
 
       <Collapse
         className='season-content'
         in={isCollapseOpen}
         timeout='auto'
+        data-testid='season-collapse'
       >
         <Box
           display='grid'
           gridTemplateColumns='repeat(12, 1fr)'
           gap={2}
-          sx={{ p: 2}}
+          sx={{ p: 2 }}
         >
           {renderEpisodes()}
         </Box>
