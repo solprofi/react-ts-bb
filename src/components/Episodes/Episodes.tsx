@@ -25,7 +25,7 @@ const Episodes = () => {
   const fetchEpisodesData = async () => {
     try {
       const data: Episode[] = await fetchEpisodes();
-      
+
       const mappedEpisodesBySeason: Seasons = groupBy(data, episode => Number(episode.season));
       setGroupedEpisodes(mappedEpisodesBySeason);
     } catch (e) {
@@ -60,6 +60,7 @@ const Episodes = () => {
         height={50}
         key={index}
         animation='wave'
+        data-testid='skeleton-loader'
       />
     ))
   }, []);
