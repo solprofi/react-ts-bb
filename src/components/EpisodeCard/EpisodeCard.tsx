@@ -34,6 +34,7 @@ const EpisodeCard = (props: EpisodeCardProps) => {
       style={{ cursor: 'pointer' }}
       onClick={handleCardClick}
       raised
+      data-testid='episode-card'
     >
       <CardContent>
         <Typography
