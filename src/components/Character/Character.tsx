@@ -68,6 +68,7 @@ const CharacterPage = () => {
         width={345}
         height={650}
         animation='wave'
+        data-testid='character-loader'
       />
     )
   }, []);
@@ -97,6 +98,7 @@ const CharacterPage = () => {
               height='450'
               image={img}
               alt={name}
+              data-testid='character-image'
             />
 
             <CardContent>
@@ -124,6 +126,7 @@ const CharacterPage = () => {
               <Typography
                 variant='body2'
                 color='text.secondary'
+                data-testid='dob'
               >
                 DOB: {birthday}
               </Typography>
