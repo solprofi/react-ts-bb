@@ -14,6 +14,7 @@ afterEach(cleanup);
 
 const mockHistoryPush = jest.fn();
 
+// mocking react router useNavigate function
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockHistoryPush,
@@ -32,6 +33,7 @@ test('<EpisodeCard /> navigates to an episode page on card click', async () => {
 
   fireEvent.click(episodeCard);
 
+  // navigate function is expected to be called with correct path 1 time
   expect(mockHistoryPush).toHaveBeenCalledTimes(1);
   expect(mockHistoryPush).toHaveBeenCalledWith(`${PATHS.EPISODES}/${mockEpisodeData.episode_id}`);
 });

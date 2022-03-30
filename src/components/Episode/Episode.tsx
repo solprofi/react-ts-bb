@@ -38,15 +38,18 @@ const EpisodePage = () => {
   }, [navigate]);
 
   const fetchEpisodeData = useCallback(async () => {
+    // episode number is incorrect, go to home page
     if (isNaN(Number(id))) {
       return redirectHome();
     }
 
     try {
       const data: Episode[] = await fetchEpisodeById(Number(id));
+      
       if (data.length) {
         setEpisodeData(data[0]);
       } else {
+        // no episode data, go to home page
         return redirectHome();
       }
     } catch (e) {

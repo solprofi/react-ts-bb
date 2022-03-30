@@ -15,5 +15,7 @@ test('<Episodes /> renders without crashing', () => {
 
 test('<Episodes /> loading skeleton should render', () => {
   render(<Episodes />);
+
+  // skeleton loader is present on page load
   expect(screen.getAllByTestId('skeleton-loader')).toBeTruthy();
 });
