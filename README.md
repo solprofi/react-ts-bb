@@ -1,8 +1,10 @@
+## Tech Stack
+
 The app is written with TypeScript.
 Main libraries that were used: React.js, MaterialUI, React-Router, Jest, React testing library.
 Node version used is 16.14.0
 
-App structure
+## App structure
 
 * -- src
 * ---- api (api calls)
@@ -12,6 +14,8 @@ App structure
 * ---- mockData (for testing)
 * ---- types (TS types)
 
+
+## Features
 
 App Pages include:
 - Main page with episodes grouped by season
