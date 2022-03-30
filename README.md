@@ -3,13 +3,14 @@ Main libraries that were used: React.js, MaterialUI, React-Router, Jest, React t
 Node version used is 16.14.0
 
 App structure
-- src
---- api (api calls)
---- assets (images, etc.)
---- components (React component, styles file*, test file*)
---- constants (api, paths, etc.)
---- mockData (for testing)
---- types (TS types)
+
+* -- src
+* ---- api (api calls)
+* ---- assets (images, etc.)
+* ---- components (React component, styles file*, test file*)
+* ---- constants (api, paths, etc.)
+* ---- mockData (for testing)
+* ---- types (TS types)
 
 
 App Pages include:
